@@ -1,0 +1,105 @@
+/* VARIABLES */
+:root {
+    --primary: #000;
+}
+
+/* RESETS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* GLOBAL CLASSES*/
+.text-center {
+    text-align: center!important;
+}
+
+.row, .column {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+
+/* CUSTOM STYLES*/
+header {
+    width: 100%;
+    display: block;
+    background: linear-gradient(to right, #116cce 0%, #081c47 85%);
+    color: #fff;
+}
+
+header h1 {
+    margin-bottom: 8px;
+    font-size: 30px;
+    font-weight: 650;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+aside {
+    margin: 10px 20px 10px 1% ; 
+}
+
+
+input, button, .search-list p{
+    width: 350px;
+    margin: 8px auto;
+    border-radius: 5px;
+    padding: 8px 15px;
+
+} 
+
+aside input {
+    border: 1px solid var(--primary);
+}
+
+aside button {
+    border: 0px ;
+    background-color: #007bff;
+    color: #fff;
+}
+
+aside .search-list p {
+    border-radius: 5px;
+    border: 0px ;
+    background-color: lightslategrey;
+    color: #fff;
+}
+
+main #today {
+    margin: 20px 0px;
+    border: 1px solid;
+    padding: 5px;
+}
+
+main p {
+    padding: 5px 1px;
+}
+
+main .forecast-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+main .forecast-card {
+    padding: 5px;
+    background-color: #203668;
+    color: #fff;
+}
+
