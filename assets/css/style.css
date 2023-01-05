@@ -53,7 +53,7 @@ header h1 {
     font-weight: 650;
 }
 
-.container {
+.wrapper {
     margin: 16px;
     display: grid;
     grid-template-columns: 1fr 4fr;
