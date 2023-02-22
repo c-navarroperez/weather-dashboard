@@ -27,7 +27,7 @@ function updateLocalStorage (cityName) {
             } 
         }
         // Update search history 
-        searchHistory.push(cityObj);
+        searchHistory.unshift(cityObj);
         // Set the search history to localStorage
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         
