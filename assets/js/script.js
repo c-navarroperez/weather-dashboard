@@ -18,15 +18,17 @@ function updateLocalStorage (cityName) {
         // Get existing search history
         let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
         //If inputted city has been stored to search history in localStorage, 
-        for (let city of searchHistory) {
+        for (let i = 0; i < searchHistory.length; i++) {
+            let city = searchHistory[i];
             if( newCityName === city.name){
-            // Return history without adding the repeated search
-            return searchHistory;
-            }
+                // remove the stored city name. 
+                // The name will be added in again as the "latest" when the list is updated 
+                searchHistory.splice(i, 1);
+            } 
         }
-        // Update search history
+        // Update search history 
         searchHistory.push(cityObj);
-        //  Set the search history to localStorage
+        // Set the search history to localStorage
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         
         return searchHistory;
