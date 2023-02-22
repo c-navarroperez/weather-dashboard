@@ -8,32 +8,42 @@ const forecastCardContainer = $('#forecast-list');
 
 // Update local storage with latest city Search
 function updateLocalStorage (cityName) {
+    // Store new entries as lower case
+    let newCityName = cityName.toLowerCase();
     // create City object to cityName
-    let cityObj = {name: cityName};
-    let searchHistory = [];
+    let cityObj = {name: newCityName};
+
     // Check for existing search history
     if (localStorage.getItem('searchHistory') !== null) {
         // Get existing search history
-        searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+        //If inputted city has been stored to search history in localStorage, 
+        for (let city of searchHistory) {
+            if( newCityName === city.name){
+            // Return history without adding the repeated search
+            return searchHistory;
+            }
+        }
         // Update search history
         searchHistory.push(cityObj);
         //  Set the search history to localStorage
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-
+        
+        return searchHistory;
     } else {
         // Store new City in local storage
-        searchHistory = [cityObj];
-        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        let newSearchHistory = [cityObj];
+        localStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
+        return newSearchHistory;
     }
-    
-    return searchHistory;
 
 }
 
 function updateSearchHistory(cityName) {
-    let historyArr = [updateLocalStorage(cityName)];
     // Add city name to search history
     //  - Get previous searches from localStorage
+    let historyArr = [updateLocalStorage(cityName)];
+
     //   2. Show search history
     //     - Pull search history from localStorage
     //     - If search history is not empty, output each city to the search history display in the DOM
