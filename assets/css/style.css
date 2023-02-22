@@ -95,17 +95,17 @@ main {
     width: 100%;
 }
 
-main .forecast-card *, main #today * {
+main .forecast-card *, #today * {
     margin-bottom: 8px;
 }
 
-main #today {
+#today {
     margin-bottom: 20px;
     border: 1px solid;
     padding: 5px;
 }
 
-main .forecast-list {
+#forecast-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
