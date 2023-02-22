@@ -6,15 +6,39 @@ const forecastWrapper = $('#forecast');
 const forecastCardContainer = $('#forecast-list');
 
 
-function searchHistory() {
-    //Add city name to search history
+// Update local storage with latest city Search
+function updateLocalStorage (cityName) {
+    // create City object to cityName
+    let cityObj = {name: cityName};
+    let searchHistory = [];
+    // Check for existing search history
+    if (localStorage.getItem('searchHistory') !== null) {
+        // Get existing search history
+        searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+        // Update search history
+        searchHistory.push(cityObj);
+        //  Set the search history to localStorage
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+
+    } else {
+        // Store new City in local storage
+        searchHistory = [cityObj];
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    }
+    
+    return searchHistory;
+
+}
+
+function updateSearchHistory(cityName) {
+    let historyArr = [updateLocalStorage(cityName)];
+    // Add city name to search history
     //  - Get previous searches from localStorage
-    //  - If inputted city has not been stored to search history in localStorage, push the city name
-    //  - Set the search history to localStorage
     //   2. Show search history
     //     - Pull search history from localStorage
     //     - If search history is not empty, output each city to the search history display in the DOM
 }
+
 
 function fetchWeatherInfo(city) {
 
@@ -88,11 +112,15 @@ function init() {
         }
         else {
             // Once a city has been inputted
+            // Save to local storage
+            updateSearchHistory(inputText);
             // Refresh the weather forecast
             refreshSearchResults(inputText);
+
         }
     });
 }
   
+
 
 init();
