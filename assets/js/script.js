@@ -58,6 +58,19 @@ function DisplayWeatherForecast(city) {
             </div>
         `).appendTo(forecastCardContainer);
     }
+
+}
+
+function refreshSearchResults(inputText) {
+    // Remove searched city from search field
+    searchInput.val('');
+    // Empty HTML for today's weather
+    $(todayWeatherWrapper).empty();
+    // Empty HTML for the 5 day forecast
+    $(forecastCardContainer).empty();
+
+    // fetch weather info 
+    fetchWeatherInfo(inputText);
 }
 
 function init() {
@@ -74,10 +87,9 @@ function init() {
             searchInput.val('');
         }
         else {
-        // Once a city has been inputted fetch weather info 
-        fetchWeatherInfo(inputText);
-        // // remove searched city from search field
-        searchInput.val('');
+            // Once a city has been inputted
+            // Refresh the weather forecast
+            refreshSearchResults(inputText);
         }
     });
 }
