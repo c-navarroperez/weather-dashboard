@@ -17,7 +17,7 @@
   </header>
 
   <!-- max-width for ultra wide resolutions -->
-  <div class="container" style="max-width: 1400px">
+  <div class="wrapper" style="max-width: 1400px">
       <aside>
         <h2 id="form-heading" class="heading">
           Search for a City:
@@ -25,7 +25,7 @@
         <form id="search-form" class="form">
           <div class="form-group">
             <div class="input-group">
-              <input class="form-input radius" type="text" id="search-input" placeholder="London"/>
+              <input class="form-input radius" type="text" id="search-input" placeholder="London, Paris, Rome..."/>
               <div class="input-group-append">
                 <button type="submit" class="search-button radius" id="search-button">
                   Search
@@ -35,60 +35,18 @@
             </div>
           </div>
         </form>
-        <div class="search-list text-center radius" id="history">
-          <p>Berlin</p>
-          <p>Paris</p>
-          <p>Rome</p>
-        </div>
+        <div id="history" class="search-list radius" >
+          <h3 class="heading">Search history:</h3>
+          <p id="no-search">Your searches will appear here</p>
+          <div id="search-history-container" class="search-list radius"></div>
+        </div>  
       </aside>
 
       <main class="column">
-        <section id="today" class="today-weather radius">
-          <h2 class="heading">London 04/01/2023 -icon-</h2>
-          <p>Temp:</p>
-          <p>Wind:</p>
-          <p>Humidity:</p>
-        </section>
-
+        <section id="today" class="today-weather"></section>
         <section id="forecast" class="forecast">
           <h2 class="heading">5-Day Forecast:</h2>
-          <div class="forecast-list">
-            <div class="forecast-card radius">
-              <h3>05/01/2023</h3>
-              <p>-icon-</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </div>
-            <div class="forecast-card radius">
-              <h3>06/01/2023</h3>
-              <p>-icon-</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </div>
-            <div class="forecast-card radius">
-              <h3>07/01/2023</h3>
-              <p>-icon-</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </div>
-            <div class="forecast-card radius">
-              <h3>08/01/2023</h3>
-              <p>-icon-</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </div>
-            <div class="forecast-card radius">
-              <h3>09/01/2023</h3>
-              <p>-icon-</p>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-            </div>
-          </div>
+          <div id="forecast-list"></div>
         </section>
       </main>
   </div>

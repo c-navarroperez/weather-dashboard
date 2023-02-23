@@ -32,11 +32,15 @@ body {
 }
 
 .heading {
-    margin-bottom: 8px;
+    margin: 8px 0px;
 }
 
 .radius {
     border-radius: 5px;
+}
+
+button {
+    cursor: pointer;
 }
 
 /* CUSTOM STYLES*/
@@ -53,7 +57,7 @@ header h1 {
     font-weight: 650;
 }
 
-.container {
+.wrapper {
     margin: 16px;
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -62,10 +66,10 @@ header h1 {
 aside {
     width: 350px;
     margin-right: 20px; 
+    padding: 5px 0px;
 }
 
-
-input, button, .search-list *{
+input, button, #no-search, .previous-search{
     width: 350px;
     margin: 8px auto;
     border-radius: 5px;
@@ -82,8 +86,10 @@ aside .search-button {
     color: #fff;
 }
 
-aside .search-list p {
+#no-search, .previous-search   {
     border: 0px ;
+    text-align: center;
+    font-size: 13px;
     background-color: lightslategrey;
     color: #fff;
 }
@@ -92,17 +98,17 @@ main {
     width: 100%;
 }
 
-main .forecast-card *, main #today * {
+main .forecast-card *, #today * {
     margin-bottom: 8px;
 }
 
-main #today {
-    margin: 20px 0px;
+#today {
+    margin-bottom: 20px;
     border: 1px solid;
     padding: 5px;
 }
 
-main .forecast-list {
+#forecast-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
