@@ -69,7 +69,7 @@ function updateLocalStorage (cityName) {
             // Set new and old searches to lowe case for comparison
             let city = searchHistory[i].name.toLowerCase();
             let newCityName = cityName.toLowerCase();
-            if( newCityName === city.name){
+            if( newCityName === city){
                 // remove the stored city name. 
                 // The name will be added in again as the "latest" when the list is updated 
                 searchHistory.splice(i, 1);
@@ -100,17 +100,25 @@ function updateSearchHistory(searchHistory) {
     }
 }
 
-function refreshSearchResults(inputText) {
-    // Remove searched city from search field
-    searchInput.val('');
+function search(inputText) {
     // Empty HTML for today's weather
-    $(todayWeatherWrapper).empty();
+    todayWeatherWrapper.empty();
     // Empty HTML for the 5 day forecast
-    $(forecastCardContainer).empty();
-
+    forecastCardContainer.empty();
     // fetch weather info 
     fetchWeatherInfo(inputText);
+    // Save to local storage
+    updateLocalStorage(inputText);
 }
+
+// Event listener for search history
+$(searchHistoryContainer).click((event) => {
+    // If a button has been pressed
+    if ($(event.target).is('button')){ 
+       let prevSearch = $(event.target).text()
+       search(prevSearch);
+    }
+});
 
 function init() {
     $(todayWeatherWrapper).hide();
@@ -134,11 +142,10 @@ function init() {
             searchInput.val('');
         }
         else {
-            // Once a city has been inputted
-            // Save to local storage
-            updateLocalStorage(inputText);
-            // Refresh the weather forecast
-            refreshSearchResults(inputText);
+            // Once a city has been inputted, search for it
+            search(inputText);
+            // Remove searched city from search field
+            searchInput.val('');
         }
     });
 }
