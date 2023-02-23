@@ -77,6 +77,11 @@ function updateLocalStorage (cityName) {
         }
         // Update search history 
         searchHistory.unshift(cityObj);
+        // If search history is more than 10 searches
+        if (searchHistory.length > 10){
+            // remove the oldest search
+            searchHistory.splice(10, 1);
+        }
         // Set the search history to localStorage
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         
