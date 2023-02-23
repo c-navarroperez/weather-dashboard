@@ -57,10 +57,8 @@ function DisplayWeatherForecast(city) {
 // - Pull search history from localStorage
 // - If search history is not empty, output each city to the search history display in the DOM
 function updateLocalStorage (cityName) {
-    // Store new entries as lower case
-    let newCityName = cityName.toLowerCase();
     // create City object to cityName
-    let cityObj = {name: newCityName};
+    let cityObj = {name: cityName};
 
     // Check for existing search history
     if (localStorage.getItem('searchHistory') !== null) {
@@ -68,7 +66,9 @@ function updateLocalStorage (cityName) {
         let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
         //If inputted city has been stored to search history in localStorage, 
         for (let i = 0; i < searchHistory.length; i++) {
-            let city = searchHistory[i];
+            // Set new and old searches to lowe case for comparison
+            let city = searchHistory[i].name.toLowerCase();
+            let newCityName = cityName.toLowerCase();
             if( newCityName === city.name){
                 // remove the stored city name. 
                 // The name will be added in again as the "latest" when the list is updated 
@@ -96,7 +96,6 @@ function updateSearchHistory(searchHistory) {
     searchHistoryContainer.empty();
     // Insert HTML buttons for every search history item
     for (let search of searchHistory) {
-        console.log(search);
         $(`<button class="previous-search">${search.name}</button>`).appendTo(searchHistoryContainer);
     }
 }
