@@ -19,9 +19,11 @@ function fetchWeatherInfo(city) {
 }
 
 function DisplayWeatherForecast(currentData) {
-    
+
     let city = `${currentData.name}`;
     let date = '04/01/2023';
+    let icon = `${currentData.weather[0].icon}`;
+    let weatherDesciption = `${currentData.weather[0].description}`;
     let temp = `${Math.round(currentData.main.temp)} Cº`;
     let wind = `${currentData.wind.speed} m/s`;
     let humidity = `${currentData.main.humidity}%`;
@@ -29,7 +31,10 @@ function DisplayWeatherForecast(currentData) {
     //Show Current Forecast
     $(todayWeatherWrapper).show();
     
-    $( `<h2 class="heading radius">${city} ${date} -icon-</h2>
+    $( `<div id="city-date-icon-wrap">
+            <h2 class="heading radius">${city} ${date}</h2>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="${weatherDesciption}"></img>
+        </div>
         <p>Temp: ${temp}</p>
         <p>Wind: ${wind}</p>
         <p>Humidity: ${humidity}</p>`
