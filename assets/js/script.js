@@ -8,20 +8,23 @@ const searchHistoryContainer = $('#search-history-container');
 const historyPlaceholder = $('#no-search');
 
 function fetchWeatherInfo(city) {
-
-    /*
-    Use OpenWeather API to retrieve weather data
-    */
-
+    // Use OpenWeather API to retrieve weather data
+    const apiKey = '8470d10ecebf34e63e09f34678ef1b65';
+    // Weather today with metric units
+    $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    .then((list) => {
     //Display Forecast
-    DisplayWeatherForecast(city);
+    DisplayWeatherForecast(list);
+    });
 }
 
-function DisplayWeatherForecast(city) {
+function DisplayWeatherForecast(currentData) {
+    
+    let city = `${currentData.name}`;
     let date = '04/01/2023';
-    let temp = '20C';
-    let wind = '4 mph';
-    let humidity = '77%';
+    let temp = `${Math.round(currentData.main.temp)} Cº`;
+    let wind = `${currentData.wind.speed} m/s`;
+    let humidity = `${currentData.main.humidity}%`;
 
     //Show Current Forecast
     $(todayWeatherWrapper).show();
