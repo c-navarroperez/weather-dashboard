@@ -108,6 +108,10 @@ main .forecast-card *, #today * {
     padding: 5px;
 }
 
+#city-date-icon-wrap {
+    display: flex;
+}
+
 #forecast-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
