@@ -69,8 +69,7 @@ aside {
     padding: 5px 0px;
 }
 
-
-input, button, .search-list > *:not(h3){
+input, button, #no-search, .previous-search{
     width: 350px;
     margin: 8px auto;
     border-radius: 5px;
@@ -87,7 +86,7 @@ aside .search-button {
     color: #fff;
 }
 
-.search-list > *:not(h3)  {
+#no-search, .previous-search   {
     border: 0px ;
     text-align: center;
     font-size: 13px;
