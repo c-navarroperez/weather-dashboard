@@ -39,6 +39,10 @@ body {
     border-radius: 5px;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* CUSTOM STYLES*/
 header {
     width: 100%;
@@ -83,7 +87,7 @@ aside .search-button {
     color: #fff;
 }
 
-aside .search-list p, .search-list button  {
+.search-list > *:not(h3)  {
     border: 0px ;
     text-align: center;
     font-size: 13px;
