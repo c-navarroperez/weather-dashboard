@@ -4,8 +4,8 @@ const resultsWrapper = $('main');
 const todayWeatherWrapper = $('#today');
 const forecastWrapper = $('#forecast');
 const forecastCardContainer = $('#forecast-list');
-const searchHistoryContainer = $('#history');
-const historyPlaceholder = $('.no-search');
+const searchHistoryContainer = $('#search-history-container');
+const historyPlaceholder = $('#no-search');
 
 function fetchWeatherInfo(city) {
 
@@ -80,27 +80,24 @@ function updateLocalStorage (cityName) {
         // Set the search history to localStorage
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         
-        return searchHistory;
+        updateSearchHistory(searchHistory);
     } else {
         // Store new City in local storage
         let newSearchHistory = [cityObj];
         localStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
-        return newSearchHistory;
+        updateSearchHistory(newSearchHistory);
     }
 }
 
-function updateSearchHistory(cityName) {
-    //Retrieve the search history from local storage
-    let historyArr = updateLocalStorage(cityName);
-
-    // Remove search history placeholder
-    historyPlaceholder.hide()
-
-    // console.log(historyArr);
-    // Insert HTML buttons for every answer choice
-    for (let search of historyArr) {
+function updateSearchHistory(searchHistory) {
+    //hide placeholder
+    historyPlaceholder.hide();
+    // Remove search history 
+    searchHistoryContainer.empty();
+    // Insert HTML buttons for every search history item
+    for (let search of searchHistory) {
         console.log(search);
-        $(`<button>${search.name}</button>`).appendTo(searchHistoryContainer);
+        $(`<button class="previous-search">${search.name}</button>`).appendTo(searchHistoryContainer);
     }
 }
 
@@ -120,6 +117,14 @@ function init() {
     $(todayWeatherWrapper).hide();
     $(forecastWrapper).hide();
 
+    // Check for existing search history and display it
+    if (localStorage.getItem('searchHistory') !== null) {
+        // Get existing search history
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+        // Display history
+        updateSearchHistory(searchHistory);
+    }
+
     // When search button is clicked 
     searchForm.submit((event) => {
         event.preventDefault();
@@ -132,7 +137,7 @@ function init() {
         else {
             // Once a city has been inputted
             // Save to local storage
-            updateSearchHistory(inputText);
+            updateLocalStorage(inputText);
             // Refresh the weather forecast
             refreshSearchResults(inputText);
         }
