@@ -7,26 +7,54 @@ const forecastCardContainer = $('#forecast-list');
 const searchHistoryContainer = $('#search-history-container');
 const historyPlaceholder = $('#no-search');
 
-function fetchWeatherInfo(city) {
+let date = moment().format('')
 
-    /*
-    Use OpenWeather API to retrieve weather data
-    */
+function fetchWeatherInfo(city) {
+    // Use OpenWeather API to retrieve weather data
+    const apiKey = '8470d10ecebf34e63e09f34678ef1b65';
+    // Weather today with metric units
+    $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    .then((list) => {
+        var lon = list.coord.lon;
+        var lat = list.coord.lat;
+
+
+//     // Fetch 5 day Forecast
+//     $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+//       .then(function (forecastData) {
+//         console.log(forecastData);
+//       });
 
     //Display Forecast
-    DisplayWeatherForecast(city);
+    DisplayWeatherForecast(list);
+    });
 }
 
-function DisplayWeatherForecast(city) {
+function DisplayWeatherForecast(currentData) {
+    
+    console.log(`
+    _____Current Conditions_____
+    City: ${currentData.name}
+    Temp: ${Math.round(currentData.main.temp)} Cº
+    Wind: ${currentData.wind.speed} M/S
+    Humidity: ${currentData.main.humidity}%
+    `);
+    
+    let city = `${currentData.name}`;
     let date = '04/01/2023';
-    let temp = '20C';
-    let wind = '4 mph';
-    let humidity = '77%';
+    let icon = `${currentData.weather[0].icon}`;
+    let weatherDesciption = `${currentData.weather[0].description}`;
+    let temp = `${Math.round(currentData.main.temp)} Cº`;
+    let wind = `${currentData.wind.speed} m/s`;
+    let humidity = `${currentData.main.humidity}%`;
 
     //Show Current Forecast
     $(todayWeatherWrapper).show();
     
-    $( `<h2 class="heading radius">${city} ${date} -icon-</h2>
+    $( `<div id="city-date-icon-wrap">
+            <h2 class="heading radius">${city} ${date}</h2>
+            <img src="https://openweathermap.org/img/w/${icon}.png" alt="${weatherDesciption}"></img>
+        </div>
         <p>Temp: ${temp}</p>
         <p>Wind: ${wind}</p>
         <p>Humidity: ${humidity}</p>`
